@@ -1,44 +1,44 @@
-##userテーブル
+##usersテーブル
 | Column                | Type   | Options                  |
 | --------------------- | ------ | -------------------------|
 | nickname              | string | null: false              |
 | email                 | string | null: false, unique: true|
 | encrypted_password    | string | null: false              |
-| family_name(sei)      | string | null: false              |
-| family_name(mei)      | string | null: false              |
-| family_name(kana,sei) | string | null: false              |
-| family_name(kana,mei) | string | null: false              |
+| family_name_sei       | string | null: false              |
+| family_name_mei       | string | null: false              |
+| family_name_kana_sei  | string | null: false              |
+| family_name_kana_mei  | string | null: false              |
 | birth                 | date   | null: false              |
 
 ### Association
 - has_many :items
-- has_many :purchase
+- has_many :purchases
 
   
 
 
-##itemテーブル
+##itemsテーブル
 | Column             | Type      | Options                       |
 | ------------------ | ----------| ------------------------------|
-| name               | text      | null: false, unique: true     |
-| status             | string    | null: false                   |
+| name               | string    | null: false                   |
+| status_id          | integer   | null: false                   |
 | explanation        | text      | null: false                   |
-| price              | string    | null: false                   |
-| shipping_sources   | text      | null: false                   |
+| price              | integer   | null: false                   |
+| prefecture_id      | integer   | null: false                   |
+| category_id        | integer   | null: false                   |
+| burden_id          | integer   | null: false                   |
 | user               | references| null: false, foreign_key: true|
-| category           | references| null: false, foreign_key: true|
-| brand              | references| null: false, foreign_key: true|
+
 
 ### Association
 - belongs_to :user
-- belongs_to :category
-- belongs_to :brand
+- has_one :purchase
 - has_one_attached :image
 
 
 
 
-##purchaseテーブル
+##purchasesテーブル
 | Column             | Type       | Options                       |
 | ------------------ | -----------| ------------------------------|
 | user               | references | null: false, foreign_key: true|
@@ -46,22 +46,24 @@
 
 ### Association
 - belongs_to :user
-- has_one :destination
+- belongs_to :item
+- has_one    :destination
 
 
 
 
 
 
-##destinationテーブル
+##destinationsテーブル
 | Column             | Type          | Options                       |
 | ------------------ | ------------- | ------------------------------|
-| post_code          | string        | null: false, unique: true     |
+| post_code          | string        | null: false                   |
 | prefecture         | string        | null: false                   |
 | cities             | string        | null: false                   |
-| street_address     | text          | null: false                   |
+| street_address     | string        | null: false                   |
 | building           | string        |                               |
 | telephone          | string        | null: false                   |
+| purchase           | references    | null: false, foreign_key: true|
 
 ### Association
 - belongs_to :purchase
@@ -72,24 +74,7 @@
 
 
 
-##categoryテーブル
-| Column             | Type       | Options                       |
-| ------------------ | -----------| ------------------------------|
-| category           | string     | null: false                   |
-| item               | references | null: false, foreign_key: true|
-
-### Association
-- has_many :items
 
 
 
 
-
-##brandテーブル
-| Column             | Type       | Options                       |
-| ------------------ | -----------| ------------------------------|
-| brand              | string     | null: false                   |
-| item               | references | null: false, foreign_key: true|
-
-### Association
-- has_many :items
