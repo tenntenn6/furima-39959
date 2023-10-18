@@ -1,16 +1,18 @@
 ##userテーブル
-| Column             | Type   | Options                  |
-| ------------------ | ------ | -------------------------|
-| nickname           | string | null: false, unique: true|
-| email              | string | null: false              |
-| encrypted_password | string | null: false              |
-| family_name        | string | null: false              |
-| family_name(kana)  | string | null: false              |
-| birth              | string | null: false              |
+| Column                | Type   | Options                  |
+| --------------------- | ------ | -------------------------|
+| nickname              | string | null: false              |
+| email                 | string | null: false, unique: true|
+| encrypted_password    | string | null: false              |
+| family_name(sei)      | string | null: false              |
+| family_name(mei)      | string | null: false              |
+| family_name(kana,sei) | string | null: false              |
+| family_name(kana,mei) | string | null: false              |
+| birth                 | date   | null: false              |
 
 ### Association
 - has_many :items
-- has_one :destination
+- has_many :purchase
 
   
 
@@ -36,6 +38,20 @@
 
 
 
+##purchaseテーブル
+| Column             | Type       | Options                       |
+| ------------------ | -----------| ------------------------------|
+| user               | references | null: false, foreign_key: true|
+| item               | references | null: false, foreign_key: true|
+
+### Association
+- belongs_to :user
+- has_one :destination
+
+
+
+
+
 
 ##destinationテーブル
 | Column             | Type          | Options                       |
@@ -44,13 +60,12 @@
 | prefecture         | string        | null: false                   |
 | cities             | string        | null: false                   |
 | street_address     | text          | null: false                   |
-| building           | text          | null: false                   |
-| telephone          | text          | null: false                   |
-| shipping_date      | text          | null: false                   |
-| user               | references    | null: false, foreign_key: true|
+| building           | string        |                               |
+| telephone          | string        | null: false                   |
 
 ### Association
-- belongs_to :user
+- belongs_to :purchase
+
 
 
 
