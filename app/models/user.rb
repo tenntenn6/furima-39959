@@ -18,6 +18,6 @@ class User < ApplicationRecord
 
   with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: '全角(カタカナ)文字を使用してください' } do
     validates :family_name_kana_sei
-    validates :family_name__kana_mei
+    validates :family_name_kana_mei
   end
 end
