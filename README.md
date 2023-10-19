@@ -27,7 +27,7 @@
 | prefecture_id      | integer   | null: false                   |
 | category_id        | integer   | null: false                   |
 | burden_id          | integer   | null: false                   |
-| shipping_date      | integer   | null: false                   |
+| shipping_date_id   | integer   | null: false                   |
 | user               | references| null: false, foreign_key: true|
 
 
