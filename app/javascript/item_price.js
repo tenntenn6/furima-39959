@@ -6,8 +6,8 @@ window.addEventListener('turbo:load', () => {
     const inputValue = priceInput.value;
     const resultPrice = Math.floor(inputValue / 10);
     addTaxDom.innerHTML = resultPrice;
-    const salesProfit = inputValue - resultPrice
-    profit.innerHTML = sells
+    const salesProfit = inputValue - resultPrice;
+    profit.innerHTML = salesProfit;
 
     
     
