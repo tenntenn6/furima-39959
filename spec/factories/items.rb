@@ -9,7 +9,9 @@ FactoryBot.define do
     prefecture_id     { '3' }
     burden_id         { '2' }
     shipping_date_id  { '2' }
-    price             { Faker::Commerce.price(range: 300..9_999_999) }
+    price             { '999999' }
+                       
+    
 
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')

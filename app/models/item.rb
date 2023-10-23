@@ -1,16 +1,16 @@
 class Item < ApplicationRecord
-  validates :name, presence: true
-  validates :explanation, presence: true
-  validates :status_id, presence: true
-  validates :category_id, presence: true
-  validates :prefecture_id, presence: true
-  validates :burden_id, presence: true
+  validates :name,           presence: true
+  validates :explanation,    presence: true
+  validates :status_id,      presence: true
+  validates :category_id,    presence: true
+  validates :prefecture_id,  presence: true
+  validates :burden_id,      presence: true
   validates :shipping_date_id, presence: true
-  validates :price, presence: true
-  validates :image, presence: true
+  validates :price,          presence: true
+  validates :image,          presence: true
 
-  validates :price, numericality: { greater_than: 299, less_than_or_equal_to: 9_999_999 }
-  validates :price, numericality: { with: /\A[0-9]+\z/ }
+  validates :price, numericality: { greater_than: 299, less_than_or_equal_to: 9_999_999 ,only_integer:true}
+  
 
   validates :category_id, :status_id, :prefecture_id, :burden_id, :shipping_date_id,
             numericality: { other_than: 1, message: "can't be blank" }
