@@ -11,7 +11,7 @@ class OrderDestination
     validates :cities
     validates :street_address
     validates :telephone
-    validates :order_id
+
   end
 
   validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を入力してください' }
@@ -22,7 +22,7 @@ class OrderDestination
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
-    Destination.create(post_code: post_code, prefecture_id: prefecture_id, cities: cities, street_address: street_address, building: building, telephone: telephone, order_id: order_id)
+    Destination.create(post_code: post_code, prefecture_id: prefecture_id, cities: cities, street_address: street_address, building: building, telephone: telephone, order_id: order.id)
   end
 
   
