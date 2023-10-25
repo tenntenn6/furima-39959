@@ -13,6 +13,11 @@ class OrderDestination
     validates :telephone
     validates :order_id
   end
+
+  validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を入力してください' }
+
+  validates :telephone, format: { with: /\A\d{10,11}\z/ }
+
    
 
   def save
