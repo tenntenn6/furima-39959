@@ -7,8 +7,8 @@ FactoryBot.define do
     cities             {'南国市'}
     street_address     {'11-1'}
     building           {'メゾンハイツ'}
-    telephone          {Faker::PhoneNumber.cell_phone}
-    order_id           {'1'}
+    telephone          {'09056655665'}
+    
 
     
   end

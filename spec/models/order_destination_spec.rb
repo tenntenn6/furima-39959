@@ -2,7 +2,8 @@ require 'rails_helper'
 RSpec.describe OrderDestination, type: :model do
   before do
     user = FactoryBot.create(:user)
-    @order_destination = FactoryBot.build(:order_destination, user_id: user.id)
+    item = FactoryBot.create(:item)
+    @order_destination = FactoryBot.build(:order_destination, user_id: user.id, item_id: item.id)
   end
 
   
@@ -42,11 +43,6 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.telephone = ''
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Telephone can't be blank"
-      end
-      it "販売購入のIDが空では購入できない" do
-        @order_destination.order_id = ''
-        @order_destination.valid?
-        expect(@order_destination.errors.full_messages).to include "Item can't be blank"
       end
       it "郵便番号にハイフンがなければ購入できない" do
         @order_destination.post_code = '1234567'
