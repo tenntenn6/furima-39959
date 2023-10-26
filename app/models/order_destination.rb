@@ -11,6 +11,7 @@ class OrderDestination
     validates :cities
     validates :street_address
     validates :telephone
+    validates :token
 
   end
 

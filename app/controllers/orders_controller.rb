@@ -16,9 +16,9 @@ def create
   if @order_destination.valid?
       Payjp.api_key = "sk_test_6d832e777ff198b0c8f82348"  
       Payjp::Charge.create(
-        amount: order_params[:price],  
-        card: order_params[:token],    
-        currency: 'jpy'                
+        amount:@item.price,
+        card:order_params[:token],    
+        currency:'jpy'  
       )
      @order_destination.save
      redirect_to root_path
