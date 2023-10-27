@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
   before_action :set_order, only: [:index, :create]
   before_action :set_user, only: [:index, :create]
   before_action :set_another_user, only: [:index, :create]
   before_action :set_roguouto, only: [:index, :create]
+  before_action :set_gon, only: [:index, :create]
 
 
 
 def index
-  gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   @order_destination = OrderDestination.new
 end
 
@@ -34,7 +33,7 @@ end
 private
 
 def order_params
-  params.require(:order_destination).permit(:post_code, :prefecture_id, :cities, :street_address, :building, :telephone, :order_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  params.require(:order_destination).permit(:post_code, :prefecture_id, :cities, :street_address, :building, :telephone).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
 end
 
 def set_order
@@ -66,5 +65,9 @@ def set_roguouto
   unless user_signed_in?
     redirect_to new_user_session_path
   end
+end
+
+def set_gon
+  gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
 end
 end

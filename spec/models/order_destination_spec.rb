@@ -79,11 +79,20 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Token can't be blank"
       end
+      it "電話番号が9桁以下では購入できない" do
+        @order_destination.telephone = '123456789'
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include "Telephone is invalid"
+      end
+      it "電話番号が12桁以上では購入できない" do
+        @order_destination.telephone = '123456789012'
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include "Telephone is invalid"
+      end
     end
   end
 
-
-
+ 
 
 
 
