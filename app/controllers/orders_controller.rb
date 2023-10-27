@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_order, only: [:index, :create]
+  before_action :set_user, only: [:index, :create]
+  before_action :set_another_user, only: [:index, :create]
+  before_action :set_roguouto, only: [:index, :create]
+
+
 
 def index
   gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -11,7 +16,6 @@ end
 
 
 def create
-  
   @order_destination = OrderDestination.new(order_params)
   
   if @order_destination.valid?
@@ -44,5 +48,23 @@ def pay_item
       card:order_params[:token],    
       currency:'jpy'  
     )
+end
+
+def  set_user
+  if user_signed_in? && current_user.id == @item.user_id
+    redirect_to root_path
+  end
+end
+
+def set_another_user
+  if user_signed_in? && current_user.id != @item.user_id && @item.order != nil
+    redirect_to root_path
+  end
+end
+
+def set_roguouto
+  unless user_signed_in?
+    redirect_to new_user_session_path
+  end
 end
 end
