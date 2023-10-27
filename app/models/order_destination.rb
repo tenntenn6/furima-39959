@@ -6,21 +6,16 @@ class OrderDestination
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :post_code
-    validates :prefecture_id
+    validates :post_code,       format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を入力してください' }
+    validates :prefecture_id,   numericality: { other_than: 1, message: "can't be blank" }
     validates :cities
     validates :street_address
-    validates :telephone
+    validates :telephone,       format: { with: /\A\d{10,11}\z/ }
     validates :token
 
   end
-
-  validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を入力してください' }
-
-  validates :telephone, format: { with: /\A\d{10,11}\z/ }
                                        
 
-   
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)

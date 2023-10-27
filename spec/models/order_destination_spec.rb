@@ -69,6 +69,16 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Item can't be blank"
       end
+      it '都道府県名に「---」が選択されている場合は出品できない' do
+        @order_destination.prefecture_id = '1'
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include "Prefecture can't be blank"
+      end
+      it "tokenか空だと購入できない" do
+        @order_destination.token = ''
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include "Token can't be blank"
+      end
     end
   end
 
