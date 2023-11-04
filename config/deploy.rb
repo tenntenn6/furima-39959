@@ -2,10 +2,10 @@
 lock '3.18.0'
 
 # Capistranoのログの表示に利用する
-set :application, 'furima_39959'
+set :application, 'furima-39959'
 
 # どのリポジトリからアプリをpullするかを指定する
-set :repo_url,  'git@github.com:tenntenn6/furima_39959.git'
+set :repo_url,'git@github.com:tenntenn6/furima-39959.git'
 set :branch, 'main'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
